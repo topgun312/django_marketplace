@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% load static i18n %}
+
+
+{% block header %}
+  {% include 'components/header.html' with no_bottom=True %}
+{% endblock %}
+
+{% block page_content %}
+  <div class="wrap">
+    <div class="wrapper">
+      <div class="header">
+        <h3 class="sign-in">Вход</h3>
+      </div>
+      <div class="clear"></div>
+      <form method="post">
+        {% csrf_token %}
+        <div>
+        </div>
+        {% if form.errors %}
+          <p>{% trans 'Incorrect login or password' %}</p>
+        {% endif %}
+        {{ form.login }}
+        {{ form.password }}
+        <div>
+        </div>
+        <div>
+          <input type="submit" value="Войти"/>
+        </div>
+        <a class="forgot-label" href="{% url 'reset_1' %}">{% trans 'Forgot password?' %}</a>
+        <a class="registr" href="{% url 'account_signup' %}">{% trans 'Registration' %}</a>
+      </form>
+    </div>
+  </div>
+{% endblock %}
